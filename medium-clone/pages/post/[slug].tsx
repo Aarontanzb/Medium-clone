@@ -1,7 +1,19 @@
 import ReadersNav from '../../components/ReadersNav'
+import Recommendations from '../../components/Recommendations'
+import ArticleMain from '@/components/ArticleMain'
+
+const styles = {
+  content: 'flex',
+}
 
 const Post = () => {
-  return <ReadersNav />
+  return (
+    <div className={styles.content}>
+      <ReadersNav />
+      <ArticleMain />
+      <Recommendations />
+    </div>
+  )
 }
 
 export default Post

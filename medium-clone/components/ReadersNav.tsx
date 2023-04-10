@@ -12,6 +12,12 @@ const styles = {
   logoContainer: 'cursor-pointer',
   wrapper:
     'w-[5rem] h-screen flex flex-col justify-between items-center p-[1rem]',
+  iconsContainer:
+    'flex-1 flex flex-col justify-center gap-[1.4rem] text-2xl text-[#787878]',
+  divider: 'border-b border-[#E5E5E5] w-[1.5rem]',
+  profileImage: 'object-cover',
+  profileImageContainer:
+    'w-[2.5rem] h-[2.5rem] rounded-full overflow-hidden place-items-center',
 }
 
 const ReadersNav = () => {
@@ -22,6 +28,13 @@ const ReadersNav = () => {
           <Image src={SmallLogo} alt="Logo img" />
         </div>
       </Link>
+      <div className={styles.iconsContainer}>
+        <BsPencilSquare />
+        <FiBell />
+      </div>
+      <div className={styles.profileImageContainer}>
+        <Image className={styles.profileImage} src={Qazi} alt="Profile img" />
+      </div>
     </div>
   )
 }
