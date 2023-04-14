@@ -22,7 +22,6 @@ const Banner = () => {
           </h3>
           <button className={styles.accentedButton}>Start Reading</button>
         </div>
-
         <Image
           className="object-contain"
           src={Logo.src}
