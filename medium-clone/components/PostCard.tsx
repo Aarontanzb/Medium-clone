@@ -2,6 +2,23 @@ import Image from 'next/image'
 import Logo from '../static/logo.png'
 import { FiBookmark } from 'react-icons/fi'
 import Link from 'next/link'
+import { db } from '../firebase'
+import { getDoc, doc } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+
+interface Post {
+  id: string
+  data: {
+    [key: string | number]: any
+  }
+}
+
+interface Author {
+  id: string
+  data: {
+    [key: string]: any
+  }
+}
 
 const styles = {
   authorContainer: 'flex gap-[0.5rem]',
@@ -16,14 +33,27 @@ const styles = {
   articleDetails: 'text-[.8rem]',
   category: 'bg-[#F2F3F2] p-1 rounded-full',
   bookmarkContainer: 'cursor-pointer',
-  thumbnailContainer: '',
+  thumbnailContainer: 'flex-1',
   wrapper:
     'flex max-w-[46rem] h-[10rem] items-center gap-[1rem] cursor-pointer',
 }
 
-const PostCard = () => {
+const PostCard = ({ post }: { post: Post }) => {
+  const [authorData, setAuthorData] = useState<Author>({} as Author)
+
+  useEffect(() => {
+    const getAuthorData = async () => {
+      console.log(
+        (await getDoc(doc(db, 'users', post.data.author))).data(),
+        'test'
+      )
+
+      setAuthorData((await getDoc(doc(db, 'users', post.data.author))).data())
+    }
+    getAuthorData()
+  }, [post])
   return (
-    <Link href={`/post/123`}>
+    <Link href={`/post/${post.id}`}>
       <div className={styles.wrapper}>
         <div className={styles.postDetails}>
           <div className={styles.authorContainer}>
@@ -36,18 +66,18 @@ const PostCard = () => {
                 alt="PostCard img"
               />
             </div>
-            <div className={styles.authorName}>Aaron Tan</div>
+            <div className={styles.authorName}>{authorData?.name}</div>
           </div>
-          <h1 className={styles.title}>
-            7 Hypotenuse.AI uses for your everyday writer 2023
-          </h1>
-          <div className={styles.briefing}>
-            Using the app is as simple as 123
-          </div>
+          <h1 className={styles.title}>{post.data.title}</h1>
+          <div className={styles.briefing}>{post.data.brief}</div>
           <div className={styles.detailsContainer}>
             <span className={styles.articleDetails}>
-              April 6 · 5 min read ·{' '}
-              <span className={styles.category}>tools</span>
+              {new Date(post.data.postedOn).toLocaleString('en-US', {
+                day: 'numeric',
+                month: 'short',
+              })}{' '}
+              · {post.data.postLength} min read ·{' '}
+              <span className={styles.category}>{post.data.category}</span>
             </span>
             <span className={styles.bookmarkContainer}>
               <FiBookmark className="h-5 w-5" />
@@ -55,7 +85,12 @@ const PostCard = () => {
           </div>
         </div>
         <div className={styles.thumbnailContainer}>
-          <Image src={Logo} height={100} width={200} alt="PostCard img" />
+          <Image
+            src={post.data.bannerImage}
+            height={100}
+            width={200}
+            alt="PostCard img"
+          />
         </div>
       </div>
     </Link>
