@@ -5,20 +5,7 @@ import Link from 'next/link'
 import { db } from '../firebase'
 import { getDoc, doc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-
-interface Post {
-  id: string
-  data: {
-    [key: string | number]: any
-  }
-}
-
-interface Author {
-  id: string
-  data: {
-    [key: string]: any
-  }
-}
+import { Article, UserData } from '@/types'
 
 const styles = {
   authorContainer: 'flex gap-[0.5rem]',
@@ -38,17 +25,16 @@ const styles = {
     'flex max-w-[46rem] h-[10rem] items-center gap-[1rem] cursor-pointer',
 }
 
-const PostCard = ({ post }: { post: Post }) => {
-  const [authorData, setAuthorData] = useState<Author>({} as Author)
+const PostCard = ({ post }: { post: Article }) => {
+  const [authorData, setAuthorData] = useState<UserData>({} as UserData)
 
   useEffect(() => {
     const getAuthorData = async () => {
-      console.log(
-        (await getDoc(doc(db, 'users', post.data.author))).data(),
-        'test'
-      )
-
-      setAuthorData((await getDoc(doc(db, 'users', post.data.author))).data())
+      const authorDoc = await getDoc(doc(db, 'users', post.data.author))
+      const authorDocData = authorDoc?.data()
+      if (authorDocData) {
+        setAuthorData(authorDocData as UserData)
+      }
     }
     getAuthorData()
   }, [post])
@@ -58,13 +44,15 @@ const PostCard = ({ post }: { post: Post }) => {
         <div className={styles.postDetails}>
           <div className={styles.authorContainer}>
             <div className={styles.authorImageContainer}>
-              <Image
-                className={styles.authorImage}
-                src={Logo}
-                height={40}
-                width={40}
-                alt="PostCard img"
-              />
+              {authorData.imageUrl && (
+                <Image
+                  className={styles.authorImage}
+                  src={authorData.imageUrl}
+                  height={40}
+                  width={40}
+                  alt="Author img"
+                />
+              )}
             </div>
             <div className={styles.authorName}>{authorData?.name}</div>
           </div>

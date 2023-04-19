@@ -32,10 +32,6 @@ const styles = {
   articleContent: 'flex-[2]',
 }
 
-type AuthorProp = {
-  name: string
-}
-
 const Recommendations = ({ author }: { author: string }) => {
   return (
     <div className={styles.wrapper}>

@@ -1,41 +1,33 @@
 import { createContext, useEffect, useState } from 'react'
 import { getDocs, collection, setDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase'
-
-interface User {
-  id: string
-  data: {
-    [key: string]: any
-  }
-}
-
-interface Post {
-  id: string
-  data: {
-    [key: string | number]: any
-  }
-}
+import { User, Article } from '@/types'
 
 interface MediumContextType {
   users: User[]
-  posts: Post[]
+  posts: Article[]
 }
 
 const MediumContext = createContext<MediumContextType>({ users: [], posts: [] })
 
 const MediumProvider = ({ children }) => {
   const [users, setUsers] = useState<User[]>([])
-  const [posts, setPosts] = useState<Post[]>([])
+  const [posts, setPosts] = useState<Article[]>([])
 
   useEffect(() => {
     const getUsers = async () => {
-      const querySnapshot = await getDocs(collection(db, 'articles'))
+      const querySnapshot = await getDocs(collection(db, 'users'))
 
       setUsers(
         querySnapshot.docs.map((doc) => {
           return {
             id: doc.id,
-            data: { ...doc.data() },
+            data: {
+              email: doc.data().email,
+              followerCount: doc.data().followerCount,
+              imageUrl: doc.data().imageUrl,
+              name: doc.data().name,
+            },
           }
         })
       )
