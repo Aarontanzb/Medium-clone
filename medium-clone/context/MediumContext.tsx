@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState, ReactNode } from 'react'
 import { getDocs, collection, setDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase'
 import { User, Article } from '@/types'
@@ -8,9 +8,13 @@ interface MediumContextType {
   posts: Article[]
 }
 
+interface Props {
+  children: ReactNode
+}
+
 const MediumContext = createContext<MediumContextType>({ users: [], posts: [] })
 
-const MediumProvider = ({ children }) => {
+const MediumProvider = ({ children }: Props) => {
   const [users, setUsers] = useState<User[]>([])
   const [posts, setPosts] = useState<Article[]>([])
 
