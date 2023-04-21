@@ -24,7 +24,9 @@ const PostModal = () => {
   const [readTime, setReadTime] = useState('')
   const [articleText, setArticleText] = useState('')
 
-  const addPostToFirebase = async (event: React.FormEvent<HTMLFormElement>) => {
+  const addPostToFirebase = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault()
 
     await addDoc(collection(db, 'articles'), {
