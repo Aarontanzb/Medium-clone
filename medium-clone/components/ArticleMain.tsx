@@ -11,7 +11,7 @@ import Banner from './../static/banner.png'
 import { Article, User } from '@/types'
 
 const styles = {
-  wrapper: 'flex items-center justify-center flex-[3] border-r h-full',
+  wrapper: 'flex items-center justify-center flex-[3] h-full',
   content: 'h-screen p-[2rem] pl-[24rem] pr-[6.5rem]',
   postHeaderContainer:
     'flex justify-between items-center mt-[2.2rem] mb-[1.2rem]',

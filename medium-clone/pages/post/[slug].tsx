@@ -7,8 +7,8 @@ import { useRouter } from 'next/router'
 import { Article, User } from '@/types'
 
 const styles = {
-  wrapper: 'flex-col',
-  content: 'flex',
+  wrapper: 'flex',
+  content: 'flex space-x-4',
 }
 
 const Post = () => {
@@ -37,7 +37,7 @@ const Post = () => {
       <ReadersNav />
       <div className={styles.content}>
         <ArticleMain post={post} author={author} />
-        <Recommendations author="test" />
+        <Recommendations />
       </div>
     </div>
   )

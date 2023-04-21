@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 const styles = {
   wrapper:
-    'h-screen min-w-[10rem] flex-[1.2] p-[2rem] pr-[14.3rem] sticky top-0',
+    'h-screen min-w-[10rem] flex-[1.2] p-[2rem] pr-[14.3rem] sticky top-0 border-l',
   accentedButton:
     'flex items-center justify-center text-sm bg-black text-white my-[.5rem] py-[.6rem] rounded-full w-[19rem]',
   authorContainer: 'my-[2rem]',
@@ -32,7 +32,7 @@ const styles = {
   articleContent: 'flex-[2]',
 }
 
-const Recommendations = ({ author }: { author: string }) => {
+const Recommendations = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.accentedButton}>Get unlimited Access</div>

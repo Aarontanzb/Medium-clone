@@ -1,5 +1,8 @@
 import Image from 'next/image'
 import Logo from '@/static/logo.png'
+import { useContext } from 'react'
+import { MediumContext } from '@/context/MediumContext'
+import ReadersNav from './ReadersNav'
 
 const styles = {
   wrapper: 'flex justify-center p-4 bg-[#FCC017]',
@@ -11,26 +14,32 @@ const styles = {
 }
 
 const Header = () => {
+  const { currentUser, handleUserAuth } = useContext(MediumContext)
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <div className={styles.logoContainer}>
-          <Image
-            className={styles.logo}
-            src={Logo}
-            height={40}
-            width={200}
-            alt="medium logo"
-          />
+    <div>
+      {currentUser ? (
+        <ReadersNav />
+      ) : (
+        <div className={styles.wrapper}>
+          <div className={styles.content}>
+            <div className={styles.logoContainer}>
+              <Image
+                className={styles.logo}
+                src={Logo}
+                height={40}
+                width={200}
+                alt="medium logo"
+              />
+            </div>
+            <div className={styles.bannerNav}>
+              <div>Our story</div>
+              <div>Membership</div>
+              <div onClick={handleUserAuth}>Sign in</div>
+              <div className={styles.accentedButton}>Get started</div>
+            </div>
+          </div>
         </div>
-
-        <div className={styles.bannerNav}>
-          <div>Our story</div>
-          <div>Membership</div>
-          <div>Sign in</div>
-          <div className={styles.accentedButton}>Get started</div>
-        </div>
-      </div>
+      )}
     </div>
   )
 }

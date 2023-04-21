@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export interface User {
   id: string
   data: {
@@ -27,4 +29,19 @@ export interface Article {
     postedOn: string
     title: string
   }
+}
+
+export interface MediumContextType {
+  users: User[]
+  posts: Article[]
+  handleUserAuth: () => Promise<void>
+  currentUser?: LoggedUser
+}
+
+export interface Props {
+  children: ReactNode
+}
+
+export interface LoggedUser {
+  [key: string]: any
 }
