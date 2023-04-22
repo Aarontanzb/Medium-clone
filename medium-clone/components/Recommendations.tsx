@@ -99,7 +99,7 @@ export default Recommendations
 
 const recommendedPosts = [
   {
-    title: 'What can you do with Hypotenuse Ai?',
+    title: 'What can you do with Hypotenuse AI?',
     image: ReplitLogo,
     author: {
       name: 'Aaron Tan',
@@ -115,7 +115,7 @@ const recommendedPosts = [
     },
   },
   {
-    title: 'How to get started with Hypotenuse Ai?',
+    title: 'How to get started with Hypotenuse AI?',
     image: JSLogo,
     author: {
       name: 'Aaron Tan',

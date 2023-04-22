@@ -20,7 +20,7 @@ const styles = {
   articleDetails: 'text-[.8rem]',
   category: 'bg-[#F2F3F2] p-1 rounded-full',
   bookmarkContainer: 'cursor-pointer',
-  thumbnailContainer: 'flex-1',
+  thumbnailContainer: 'flex-1 h-[10rem] w-[10rem] object-cover',
   wrapper:
     'flex max-w-[46rem] h-[10rem] items-center gap-[1rem] cursor-pointer',
 }

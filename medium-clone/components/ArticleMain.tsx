@@ -28,7 +28,8 @@ const styles = {
   image: 'w-full h-full object-cover',
   title: 'font-bold text-3xl',
   subtitle: 'font-mediumSerifItalic text-[1.4rem] text-[#787878]',
-  articleText: 'font-mediumSerif text-[1.3rem] text-[#292929]',
+  articleText:
+    'font-mediumSerif text-[1.3rem] text-[#292929] white-space: pre-wrap',
 }
 
 const ArticleMain = ({ post, author }: { post: Article; author: User }) => {
@@ -84,7 +85,10 @@ const ArticleMain = ({ post, author }: { post: Article; author: User }) => {
               alt="banner"
             />
           </div>
-          <div className={styles.articleText}>{post?.data?.body}</div>
+          <div
+            className={styles.articleText}
+            dangerouslySetInnerHTML={{ __html: post?.data?.body }}
+          ></div>
         </div>
       </div>
     </div>

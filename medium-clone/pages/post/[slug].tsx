@@ -7,8 +7,8 @@ import { useRouter } from 'next/router'
 import { Article, User } from '@/types'
 
 const styles = {
-  wrapper: 'flex',
-  content: 'flex space-x-4',
+  wrapper: 'flex flex-col',
+  content: 'flex ',
 }
 
 const Post = () => {
